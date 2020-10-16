@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function playRound(playerSelection,computerSelection){
+            // function for comparing player's selection and computer's selection
+            if(playerSelection === computerSelection){
+                console.log(`player: ${playerSelection} vs computer: ${computerSelection}`);
+                return "Tie";
+            }
+            else if(
+                (playerSelection==='rock' && computerSelection==='scissors')||
+                (playerSelection === 'scissors' && computerSelection === 'paper')||
+                (playerSelection === 'paper' && computerSelection === 'rock')
+                ){
+                    console.log(`player: ${playerSelection} vs computer: ${computerSelection}`);
+                    return "You Win";
+                }
+            else{
+                console.log(`player: ${playerSelection} vs computer: ${computerSelection}`);
+                return "You Lose"
+            }
+        }
+        
+        function computerPlay(){
+            // function for computer to make selection
+            const optionList = ['rock', 'paper', 'scissors'];
+            const i = Math.floor(Math.random()*3);
+            return optionList[i];
+        }
+
+        function playerOne(){
+            // function for player to enter his/her selection
+            const object = prompt('Pick Yours: ').toLowerCase();
+            if(object === "rock" || object === "paper" || object === "scissors"){
+                return object;
+            }
+            else{
+                alert("please select: rock , paper, scissors")
+                playerOne();
+            }
+        }
+
+        function game(){
+            // function to go several(5) rounds
+            let comp = 0;
+            let player = 0;
+            for(let i = 0; i<5; i++){
+                let round = playRound(playerOne(), computerPlay());
+                if(round === "You Win"){
+                    player++;
+                }
+                else if(round === "You Lose"){
+                    comp++;
+                }
+                else{
+                    continue;
+                }
+            }
+            if (player > comp) {
+                console.log(`You:${player} vs Computer:${comp}`);
+                return "You Win";
+            }
+            else if (player === comp) {
+                console.log(`You:${player} vs Computer:${comp}`);
+                return "There was a tie";
+            }
+            else{
+                console.log(`You:${player} vs Computer:${comp}`);
+                return "You Lose";
+            }  
+        }
+
+        const outcome = game();
+        console.log(outcome)
+    </script>
+</body>
+</html>
